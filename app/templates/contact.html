@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="container mt-4">
+    
+    <h1>Contact Form</h1>
+    <hr>
+    <div class="row">
+    <div class="col-md-6">
+    <p> Fill in this form below to contact the owners of this site.</p>
+    <form method="POST" action="{{ url_for('contact') }}">
+    {{ form.csrf_token }}
+
+        <div class="mb-3">
+            <label class="form-label">
+                {{ form.name.label }}
+                <span class="text-danger">(Required)</span>
+            </label>
+            <small class="form-text text-muted d-block mb-1">
+                Please enter your full name.
+            </small>
+
+            {{ form.name(class="form-control") }}
+
+            {% for err in form.name.errors %}
+            <small>{{ err }}</small>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">
+                {{ form.email.label }}
+                <span class="text-danger">(Required)</span>
+            </label>
+            <small class="form-text text-muted d-block mb-1">
+                Please enter your valid e-mail address.
+            </small>
+
+            {{ form.email(class="form-control") }}
+
+
+            {% for err in form.email.errors %}
+            <small>{{ err }}</small>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">
+                {{ form.subject.label }}
+                <span class="text-danger">(Required)</span>
+            </label>
+            <small class="form-text text-muted d-block mb-1">
+                Please enter the subject for your message.
+            </small>
+            
+            {{ form.subject(class="form-control") }}
+
+
+            {% for err in form.subject.errors %}
+            <small>{{ err }}</small>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">
+                {{ form.message.label }}
+                <span class="text-danger">(Required)</span>
+            </label>
+            <small class="form-text text-muted d-block mb-1">
+                Please enter the message you wish to send.
+            </small>
+
+            
+            {{ form.message(rows=6, cols=60, class="form-control") }}
+            {% for err in form.message.errors %}
+            <small>{{ err }}</small>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+        </form>
+         </div>
+    </div>
+</div>
+{% endblock %}
